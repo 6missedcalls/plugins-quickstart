@@ -1,15 +1,15 @@
 openapi: 3.0.1
 info:
-  title: TODO Plugin
-  description: A plugin that allows the user to create and manage a TODO list using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  title: Shadowy Shitcoin Advisor
+  description: A plugin to track your shitcoin portfolio!
   version: 'v1'
 servers:
   - url: http://localhost:5003
 paths:
-  /todos/{username}:
+  /ethereum/shitcoins/{username}:
     get:
-      operationId: getTodos
-      summary: Get the list of todos
+      operationId: getCoins
+      summary: Get the list of coins.
       parameters:
       - in: path
         name: username
@@ -23,10 +23,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getTodosResponse'
+                $ref: '#/components/schemas/getCoinResponse'
     post:
-      operationId: addTodo
-      summary: Add a todo to the list
+      operationId: addCoin
+      summary: Add a coin to the list.
       parameters:
       - in: path
         name: username
@@ -39,13 +39,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/addTodoRequest'
+              $ref: '#/components/schemas/addCoinRequest'
       responses:
         "200":
           description: OK
     delete:
-      operationId: deleteTodo
-      summary: Delete a todo from the list
+      operationId: deleteCoin
+      summary: Delete a coin from the list.
       parameters:
       - in: path
         name: username
@@ -58,14 +58,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deleteTodoRequest'
+              $ref: '#/components/schemas/removeCoinRequest'
       responses:
         "200":
           description: OK
-
+  
 components:
   schemas:
-    getTodosResponse:
+    getCoinResponse:
       type: object
       properties:
         todos:
@@ -73,21 +73,21 @@ components:
           items:
             type: string
           description: The list of todos.
-    addTodoRequest:
+    addCoinRequest:
       type: object
       required:
-      - todo
+      - coin
       properties:
-        todo:
+        coin:
           type: string
-          description: The todo to add to the list.
+          description: The shitcoin to add to the list.
           required: true
-    deleteTodoRequest:
+    removeCoinRequest:
       type: object
       required:
-      - todo_idx
+      - coin
       properties:
-        todo_idx:
-          type: integer
-          description: The index of the todo to delete.
+        coin:
+          type: string
+          description: The shitcoin to remove from the list.
           required: true

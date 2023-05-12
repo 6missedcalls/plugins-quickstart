@@ -32,6 +32,15 @@ async def delete_coin(username):
     _COINS[username].remove(request["shitcoin"])
     return quart.Response(response='OK', status=200)
 
+# Get coin price
+# @app.get("/ethereum/price/<string:coin>")
+# async def get_price(coin):
+#     url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin}&vs_currencies=usd"
+#     async with quart.ClientSession() as session:
+#         async with session.get(url) as response:
+#             data = await response.json()
+#             return quart.Response(response=json.dumps(data), status=200)
+
 # Required Endpoints
 @app.get("/logo.png")
 async def plugin_logo():
